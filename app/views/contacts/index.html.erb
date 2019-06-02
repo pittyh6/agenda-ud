@@ -1,0 +1,40 @@
+<div class = "basic-grey">
+  <p id="notice"><%= notice %></p>
+
+  <!--<h1><%= Contact.model_name.human(count:2) %></h1>-->
+  <h1><%= "#{t('message.listing')} #{@contacts.model_name.human(count: @contacts.count)}"%></h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th><%= @contacts.human_attribute_name("name")%></th>
+        <th><%= @contacts.human_attribute_name("kind")%></th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @contacts.each do |contact| %>
+        <tr style="background: <%= cycle('#F6F5FF', '#FFFFEC')%>">
+          <td><%= contact.name %></td>
+          <td><%= contact.kind.description %></td>
+          <!--<td><%= contact.rmk %></td>-->
+          <td><%= link_to t('buttons.edit'), edit_contact_path(contact) %></td>
+          <td><%= link_to t('buttons.destroy'), contact, method: :delete, data: { confirm: t('message.confirm') } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <%= paginate @contacts %>
+
+  <br>
+  <div class="actions">
+    <%= link_to t('buttons.new'), new_contact_path, class: "button" %>
+    <%= link_to 'Back', root_path, class: "button" %>
+    <%= link_to t('buttons.new'), new_contact_path, class: "btn btn-primary" %>
+
+  </div>
+  btn btn-primary
+
+</div>
